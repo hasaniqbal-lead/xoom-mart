@@ -1,0 +1,36 @@
+{
+  "name": "xoom-mart",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Xoom Mart - Hyperlocal Commerce Platform",
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "backend"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:customer\" \"npm run dev:admin\" \"npm run dev:rider\"",
+    "dev:backend": "cd backend && npm run start:dev",
+    "dev:customer": "cd apps/customer && npm run dev",
+    "dev:admin": "cd apps/admin && npm run dev",
+    "dev:rider": "cd apps/rider && npm run dev",
+    "build": "npm run build:backend && npm run build:customer && npm run build:admin && npm run build:rider",
+    "build:backend": "cd backend && npm run build",
+    "build:customer": "cd apps/customer && npm run build",
+    "build:admin": "cd apps/admin && npm run build",
+    "build:rider": "cd apps/rider && npm run build",
+    "lint": "npm run lint --workspaces",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
+    "clean": "rm -rf node_modules apps/*/node_modules packages/*/node_modules backend/node_modules",
+    "setup": "npm install && cd backend && npx prisma generate"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "prettier": "^3.1.1",
+    "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  }
+}
